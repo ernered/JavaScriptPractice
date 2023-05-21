@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <!--		
-		ITPRG 157
-		Lab # - X.Y
+		
 		Description:
-			YOUR DETAILED DESCRIPTION OF WHAT THE PAGE/APPLICATION DOES
-		Created by: YOUR NAME HERE
-		Created on: DATE YOU FINISHED WORK
+			Bouncing ball graphic
+		Created by: ernered
+		Created on: May 2023
 -->
-<html lang ="en">
-	<head>
-        <meta charset="utf-8">
-		<meta name="author" content="YOUR NAME HERE">
-		<meta content="description" content="YOUR DESCRIPTION HERE">
-		<title>Bouncing Ball Picture</title>
-		
-		
-		<style>
-		  h1 {
-			  text-align:center;
-			  color:red;
-		  }
-		  
-		  canvas {
-			 background-color:gold;
-			 width:600px;
-			 height:600px;
-			 padding-left:0;
-             padding-right:0;
-			 margin-left:auto;
-             margin-right:auto;
-			 display:block;
-			 border:2px solid black;
-		  }
-		
-		</style>
-		
-		
-	</head>
-	<body>
-		<h1>Bouncing Ball Picture</h1>
-		<canvas>
-		</canvas>
-		
-		<script>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="YOUR NAME HERE">
+	<meta content="description" content="YOUR DESCRIPTION HERE">
+	<title>Bouncing Ball Picture</title>
+
+
+	<style>
+		h1 {
+			text-align: center;
+			color: red;
+		}
+
+		canvas {
+			background-color: gold;
+			width: 600px;
+			height: 600px;
+			padding-left: 0;
+			padding-right: 0;
+			margin-left: auto;
+			margin-right: auto;
+			display: block;
+			border: 2px solid black;
+		}
+	</style>
+
+
+</head>
+
+<body>
+	<h1>Bouncing Ball Picture</h1>
+	<canvas>
+	</canvas>
+
+	<script>
 		var canvas = document.querySelector("canvas");
-		    canvas.width = 600;
-            canvas.height = 600;
-			
+		canvas.width = 600;
+		canvas.height = 600;
+
 		var ctx = canvas.getContext("2d");
 
 		var xcord = 0;
@@ -57,49 +57,50 @@
 		var moveup = false;
 		var moveright = true;
 		const img = new Image();
-		img.src = "./ball.png";	
+		img.src = "./ball.png";
 
 		bounceball()
-		
-		
+
+
 		function bounceball() {
 			requestAnimationFrame(bounceball);
 			drawball();
 			checkhit();
 			moveball();
 		}
-		
+
 		function drawball() {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			ctx.beginPath();
 			ctx.drawImage(img, xcord, ycord);
 		}
-		
+
 		function checkhit() {
-			
-			if (ycord + size > canvas.height-1)
-				  moveup = true;
+
+			if (ycord + size > canvas.height - 1)
+				moveup = true;
 			if (ycord < 0)
-			      moveup = false; 
-			if (xcord + size > canvas.width-1)
-				  moveright = false;
+				moveup = false;
+			if (xcord + size > canvas.width - 1)
+				moveright = false;
 			if (xcord < 0)
-				  moveright = true;	
+				moveright = true;
 		}
-		
+
 		function moveball() {
 			if (moveright == true)
-				  xcord = xcord + xspeed;
+				xcord = xcord + xspeed;
 			else
-				  xcord = xcord - xspeed;
+				xcord = xcord - xspeed;
 			if (moveup == true)
-				  ycord = ycord - yspeed;
+				ycord = ycord - yspeed;
 			else
-				  ycord = ycord + yspeed;
+				ycord = ycord + yspeed;
 
 		}
-		
-		</script>
-		
-	</body>
+
+	</script>
+
+</body>
+
 </html>

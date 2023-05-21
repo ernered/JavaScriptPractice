@@ -1,80 +1,81 @@
 <!DOCTYPE html>
 <!--		
-		ITPRG 157
-		Lab # - X.Y
+
 		Description:
-			YOUR DETAILED DESCRIPTION OF WHAT THE PAGE/APPLICATION DOES
-		Created by: YOUR NAME HERE
-		Created on: DATE YOU FINISHED WORK
+			Game where you try to eliminate the invaders
+		Created by: ernered
+		Created on: May 2023
 -->
-<html lang ="en">
-	<head>
-        <meta charset="utf-8">
-		<meta name="author" content="YOUR NAME HERE">
-		<meta content="description" content="YOUR DESCRIPTION HERE">
-		<title>EZ Invaders</title>
-		<style>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="YOUR NAME HERE">
+	<meta content="description" content="YOUR DESCRIPTION HERE">
+	<title>EZ Invaders</title>
+	<style>
 		h1 {
-				text-align: center;
-			}
-		button{
-				display:block;
-				margin-left:auto;
-				margin-right:auto;
-			}
+			text-align: center;
+		}
+
+		button {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
 		canvas {
-			    background-color:beige;
-				width:800px;
-				height:600px;
-				padding-left:0;
-                padding-right:0;
-			    margin-left:auto;
-                margin-right:auto;
-				display:block;
-				border:2px solid black;
-			}	
-			
-			
-		</style>
-	</head>
-	<body>
-		<h1> EZ Invaders </h1>
-		 <br>
-		 <br>
-		 <br>
-		 <button id="btnStartGame" onclick="startGame()">Start Game</button>
-		 <br>
-		 <br>
-		 <br>
-		 <canvas>
-	     </canvas>
-		 <script>
-		 var canvas = document.querySelector("canvas");
-		  canvas.width = 800;
-          canvas.height = 600;
-		  
-		  var ctx = canvas.getContext("2d");
-		  
-		  
-		  const audioIntro = new Audio("wavs/Intro.wav");
-		  const audioShot = new Audio("wavs/Shot.wav");
-		  const audioHit = new Audio("wavs/Hit.wav");
-		  const audioWin = new Audio("wavs/Win.wav");
-		  const audioDead = new Audio("wavs/Dead.wav");
-		  
-		 // shooter
+			background-color: beige;
+			width: 800px;
+			height: 600px;
+			padding-left: 0;
+			padding-right: 0;
+			margin-left: auto;
+			margin-right: auto;
+			display: block;
+			border: 2px solid black;
+		}
+	</style>
+</head>
+
+<body>
+	<h1> EZ Invaders </h1>
+	<br>
+	<br>
+	<br>
+	<button id="btnStartGame" onclick="startGame()">Start Game</button>
+	<br>
+	<br>
+	<br>
+	<canvas>
+	</canvas>
+	<script>
+		var canvas = document.querySelector("canvas");
+		canvas.width = 800;
+		canvas.height = 600;
+
+		var ctx = canvas.getContext("2d");
+
+
+		const audioIntro = new Audio("wavs/Intro.wav");
+		const audioShot = new Audio("wavs/Shot.wav");
+		const audioHit = new Audio("wavs/Hit.wav");
+		const audioWin = new Audio("wavs/Win.wav");
+		const audioDead = new Audio("wavs/Dead.wav");
+
+		// shooter
 		const shooter = {
 			pic: new Image(),
-		    width: 50,
+			width: 50,
 			height: 50,
-			xCord:0,
-			yCord:0,
+			xCord: 0,
+			yCord: 0,
 			moveRight: false,
 			moveLeft: false,
 			speed: 6,
 		};
 
-		 //shot
+		//shot
 		const shot = {
 			pic: new Image(),
 			xCord: 0,
@@ -86,178 +87,179 @@
 		};
 
 		class invader {
-		constructor(xCord, yCord, moveRight, speed, drop, pic, height, width, killed, spacing){
-		  this.xCord = xCord;
-		  this.yCord = yCord;
-		  this.moveRight = moveRight;
-		  this.speed = speed;
-		  this.drop = drop;
-		  this.pic = pic;
-		  this.height = height;
-		  this.width = width;
-		  this.killed = killed;
-		  this.spacing = spacing;
+			constructor(xCord, yCord, moveRight, speed, drop, pic, height, width, killed, spacing) {
+				this.xCord = xCord;
+				this.yCord = yCord;
+				this.moveRight = moveRight;
+				this.speed = speed;
+				this.drop = drop;
+				this.pic = pic;
+				this.height = height;
+				this.width = width;
+				this.killed = killed;
+				this.spacing = spacing;
+			}
+
 		}
 
-		}	
-		
 		const numOfInvaders = 15;
 		var invadersArray = [];
 		var shotDown = 0;
-		
-		
-		document.body.onkeydown=function(event){
-		//left
-        if(event.keyCode == 37) {
-		   shooter.moveLeft = true;
-		   shooter.moveRight = false;
-         }
-        //right
-        if(event.keyCode == 39) {
-          shooter.moveRight = true;
-		  shooter.moveLeft = false;
-         }
-		 
-		 if(event.keyCode == 32 & shot.fired == false) {
-		 shot.fired = true;
-		 shot.xCord = shooter.xCord + shooter.width/2 - shot.width/2;
-		 shot.yCord = canvas.height - shooter.height;
-		 audioShot.play();
-		 } 
-		}
-		
-		document.body.onkeyup=function(event){
-		//left
-		 if(event.keyCode == 37) {
-		 shooter.moveLeft = false;
-		 }
-		 //right
-		 if(event.keyCode == 39) {
-		 shooter.moveRight = false;
-		 } 
-		 }
-		
-		
-		
-		function startGame(){
-		document.getElementById("btnStartGame").disabled = true;	
-		shooter.xCord = (canvas.width/2 - shooter.width/2);
-		shooter.yCord = canvas.height - shooter.height;
-		shooter.pic.src = "pics/Shooter.png";
-		shot.pic.src = "pics/Shot.png";
-		
-		loadInvaders();
-		audioIntro.play();
-		playGame();
-		
-		}
-		
-		function loadInvaders(){
-			for (let i = 0; i < numOfInvaders; i++){
-			let inv = new invader((-i * 70) - 500, 0, true, 5, 50, new Image(), 50, 50, false, 50);
-			inv.pic.src = "pics/Invader.png";
-			invadersArray.push(inv);
+
+
+		document.body.onkeydown = function (event) {
+			//left
+			if (event.keyCode == 37) {
+				shooter.moveLeft = true;
+				shooter.moveRight = false;
+			}
+			//right
+			if (event.keyCode == 39) {
+				shooter.moveRight = true;
+				shooter.moveLeft = false;
+			}
+
+			if (event.keyCode == 32 & shot.fired == false) {
+				shot.fired = true;
+				shot.xCord = shooter.xCord + shooter.width / 2 - shot.width / 2;
+				shot.yCord = canvas.height - shooter.height;
+				audioShot.play();
 			}
 		}
-		
-		function playGame(){
-        let lose = false;
-		
-		moveShooter();
-		moveShot();
-		moveInvaders();
-		checkHit();
-		
-		
-		
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.drawImage(shooter.pic, shooter.xCord, shooter.yCord);
-		ctx.drawImage(shot.pic, shot.xCord, shot.yCord);
-		
-		for (let i = 0; i < numOfInvaders; i++){
-			if (invadersArray[i].killed == false){
-		    	ctx.drawImage(invadersArray[i].pic, invadersArray[i].xCord, invadersArray[i].yCord);
-			
-			if (invadersArray[i].yCord >= shooter.yCord - invadersArray[i].height) {
-			   lose = true;
-			   }
-			
+
+		document.body.onkeyup = function (event) {
+			//left
+			if (event.keyCode == 37) {
+				shooter.moveLeft = false;
+			}
+			//right
+			if (event.keyCode == 39) {
+				shooter.moveRight = false;
+			}
+		}
+
+
+
+		function startGame() {
+			document.getElementById("btnStartGame").disabled = true;
+			shooter.xCord = (canvas.width / 2 - shooter.width / 2);
+			shooter.yCord = canvas.height - shooter.height;
+			shooter.pic.src = "pics/Shooter.png";
+			shot.pic.src = "pics/Shot.png";
+
+			loadInvaders();
+			audioIntro.play();
+			playGame();
+
+		}
+
+		function loadInvaders() {
+			for (let i = 0; i < numOfInvaders; i++) {
+				let inv = new invader((-i * 70) - 500, 0, true, 5, 50, new Image(), 50, 50, false, 50);
+				inv.pic.src = "pics/Invader.png";
+				invadersArray.push(inv);
+			}
+		}
+
+		function playGame() {
+			let lose = false;
+
+			moveShooter();
+			moveShot();
+			moveInvaders();
+			checkHit();
+
+
+
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.drawImage(shooter.pic, shooter.xCord, shooter.yCord);
+			ctx.drawImage(shot.pic, shot.xCord, shot.yCord);
+
+			for (let i = 0; i < numOfInvaders; i++) {
+				if (invadersArray[i].killed == false) {
+					ctx.drawImage(invadersArray[i].pic, invadersArray[i].xCord, invadersArray[i].yCord);
+
+					if (invadersArray[i].yCord >= shooter.yCord - invadersArray[i].height) {
+						lose = true;
+					}
+
+				}
+
+			}
+
+
+			if ((shotDown < numOfInvaders) & (lose == false)) {
+				requestAnimationFrame(playGame);
+			}
+
+			if (shotDown == numOfInvaders) {
+				ctx.font = "48px serif";
+				ctx.fillText("You Win", 300, 300);
+				audioWin.play();
+			}
+
+			if (lose == true) {
+				ctx.font = "48px serif";
+				ctx.fillText("Earth Invaded", 270, 300);
+				audioDead.play();
 			}
 
 		}
-		
-		
-		if ((shotDown < numOfInvaders) & (lose == false)) {
-			requestAnimationFrame(playGame);
-		}
-		
-		if (shotDown == numOfInvaders){
-		    ctx.font = "48px serif";
-            ctx.fillText("You Win", 300, 300);
-			audioWin.play();
-		}	
-		
-		if (lose == true){
-			ctx.font = "48px serif";
-			ctx.fillText("Earth Invaded", 270, 300);
-			audioDead.play();
-		}
-		
-		}
-		
+
 		function moveShooter() {
 			if (shooter.moveLeft == true & shooter.xCord > 0) {
 				shooter.xCord -= shooter.speed;
 			}
-			
-			if (shooter.moveRight == true & shooter.xCord + shooter.width < canvas.width){
+
+			if (shooter.moveRight == true & shooter.xCord + shooter.width < canvas.width) {
 				shooter.xCord += shooter.speed;
 			}
 		}
-		
+
 		function moveShot() {
-	     if (shot.fired == true) {
-		   shot.yCord -= shot.speed;	
-		}
-		
-		if (shot.yCord + shot.height < 0) {
-		     shot.fired = false;
-		   }		
-		}
-		
-		function moveInvaders(){
-		for (let i = 0; i < numOfInvaders; i++){
-			if (invadersArray[i].moveRight == true){
-				invadersArray[i].xCord += invadersArray[i].speed;
-			}	
-			else {
-				invadersArray[i].xCord -= invadersArray[i].speed;
-			}	
-			
-			if (invadersArray[i].xCord + invadersArray[i].width >= canvas.width & invadersArray[i].moveRight == true){
-		       invadersArray[i].moveRight = false;
-		       invadersArray[i].yCord += invadersArray[i].drop;
-		    }
-			
-			if (invadersArray[i].xCord <= 0 & invadersArray[i].moveRight == false){
-				invadersArray[i].moveRight = true;
-				invadersArray[i].yCord += invadersArray[i].drop;
-			}			
-			
-		}
-		}
-		function checkHit(){
-			for(let i=0; i < numOfInvaders; i++){
-			if ((shot.xCord + shot.width >= invadersArray[i].xCord) & (shot.xCord <= invadersArray[i].xCord + invadersArray[i].width) & (shot.yCord <= invadersArray[i].yCord + invadersArray[i].height) & (shot.yCord + shot.height >= invadersArray[i].yCord) & (invadersArray[i].killed == false)){
-				audioHit.play();
-				invadersArray[i].killed = true;
+			if (shot.fired == true) {
+				shot.yCord -= shot.speed;
+			}
+
+			if (shot.yCord + shot.height < 0) {
 				shot.fired = false;
-			    shot.yCord = -70;
-				shotDown++;
-			}
 			}
 		}
-		  
-		 </script>
-	</body>
+
+		function moveInvaders() {
+			for (let i = 0; i < numOfInvaders; i++) {
+				if (invadersArray[i].moveRight == true) {
+					invadersArray[i].xCord += invadersArray[i].speed;
+				}
+				else {
+					invadersArray[i].xCord -= invadersArray[i].speed;
+				}
+
+				if (invadersArray[i].xCord + invadersArray[i].width >= canvas.width & invadersArray[i].moveRight == true) {
+					invadersArray[i].moveRight = false;
+					invadersArray[i].yCord += invadersArray[i].drop;
+				}
+
+				if (invadersArray[i].xCord <= 0 & invadersArray[i].moveRight == false) {
+					invadersArray[i].moveRight = true;
+					invadersArray[i].yCord += invadersArray[i].drop;
+				}
+
+			}
+		}
+		function checkHit() {
+			for (let i = 0; i < numOfInvaders; i++) {
+				if ((shot.xCord + shot.width >= invadersArray[i].xCord) & (shot.xCord <= invadersArray[i].xCord + invadersArray[i].width) & (shot.yCord <= invadersArray[i].yCord + invadersArray[i].height) & (shot.yCord + shot.height >= invadersArray[i].yCord) & (invadersArray[i].killed == false)) {
+					audioHit.play();
+					invadersArray[i].killed = true;
+					shot.fired = false;
+					shot.yCord = -70;
+					shotDown++;
+				}
+			}
+		}
+
+	</script>
+</body>
+
 </html>

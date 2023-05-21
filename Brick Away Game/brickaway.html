@@ -1,99 +1,99 @@
 <!DOCTYPE html>
 <!--		
-		ITPRG 157
-		Lab # - X.Y
+
 		Description:
-			YOUR DETAILED DESCRIPTION OF WHAT THE PAGE/APPLICATION DOES
-		Created by: YOUR NAME HERE
-		Created on: DATE YOU FINISHED WORK
+			Game where you try to eliminate all bricks
+		Created by: ernered
+		Created on: May 2023
 -->
-<html lang ="en">
-	<head>
-        <meta charset="utf-8">
-		<meta name="author" content="YOUR NAME HERE">
-		<meta content="description" content="YOUR DESCRIPTION HERE">
-		<title>Brick Away</title>
-	
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="YOUR NAME HERE">
+	<meta content="description" content="YOUR DESCRIPTION HERE">
+	<title>Brick Away</title>
+
 	<style>
-			h1 {
-				text-align: center;
-			}
-			button{
-				display:block;
-				margin-left:auto;
-				margin-right:auto;
-			}	
-			
-			canvas {
-			    background-color:beige;
-				width:800px;
-				height:600px;
-				padding-left:0;
-                padding-right:0;
-			    margin-left:auto;
-                margin-right:auto;
-				display:block;
-				border:2px solid black;
-			}				
-			
+		h1 {
+			text-align: center;
+		}
+
+		button {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		canvas {
+			background-color: beige;
+			width: 800px;
+			height: 600px;
+			padding-left: 0;
+			padding-right: 0;
+			margin-left: auto;
+			margin-right: auto;
+			display: block;
+			border: 2px solid black;
+		}
 	</style>
-	</head>
-	
-	<body>
-		<h1>Brick Away</h1>
-		<br>
-		 <br>
-		 <br>
-		 <button id="btnStartGame" onclick="startGame()">Start Game</button>
-		 <br>
-		 <br>
-		 <br>
-		  <canvas>
-	      </canvas>
-		 
-		  <script>
-		  var canvas = document.querySelector("canvas");
-		    canvas.width = 800;
-            canvas.height = 600;
-		 
-		  var ctx = canvas.getContext("2d");
-		  
-		  document.addEventListener("mousemove", mouseMove, false);
-		  
-		  const paddle = {
-			  pic: new Image(),
-			  xCord: 200,
-			  yCord: canvas.height - 25,
-			  width: 80,
-			  height: 15,
-			};
-			
-			const ball = {
-				pic: new Image(),
-				xCord: 0,
-				yCord: 150,
-				size: 25,
-				xSpeed: 1,
-				ySpeed: 1,
-				moveUp: false,
-				moveRight: true,
-			};	
-			
-			class brick {
-				constructor(xCord, yCord, pic, height, width, killed){
+</head>
+
+<body>
+	<h1>Brick Away</h1>
+	<br>
+	<br>
+	<br>
+	<button id="btnStartGame" onclick="startGame()">Start Game</button>
+	<br>
+	<br>
+	<br>
+	<canvas>
+	</canvas>
+
+	<script>
+		var canvas = document.querySelector("canvas");
+		canvas.width = 800;
+		canvas.height = 600;
+
+		var ctx = canvas.getContext("2d");
+
+		document.addEventListener("mousemove", mouseMove, false);
+
+		const paddle = {
+			pic: new Image(),
+			xCord: 200,
+			yCord: canvas.height - 25,
+			width: 80,
+			height: 15,
+		};
+
+		const ball = {
+			pic: new Image(),
+			xCord: 0,
+			yCord: 150,
+			size: 25,
+			xSpeed: 1,
+			ySpeed: 1,
+			moveUp: false,
+			moveRight: true,
+		};
+
+		class brick {
+			constructor(xCord, yCord, pic, height, width, killed) {
 				this.xCord = xCord;
 				this.yCord = yCord;
 				this.pic = pic;
 				this.height = height;
 				this.width = width;
-				this.killed = killed;	
-				}
+				this.killed = killed;
 			}
-		 
-			var numOfBricks = 68;
-			var bricksKilled = 0;
-			var bricksArray = [];
-			
+		}
+
+		var numOfBricks = 68;
+		var bricksKilled = 0;
+		var bricksArray = [];
+
 		function startGame() {
 			document.getElementById("btnStartGame").disabled = true;
 			paddle.pic.src = "pics/Paddle.png";
@@ -101,152 +101,153 @@
 			loadBricks();
 			playGame();
 		}
-		
-		function loadBricks() {
-			for (let i = 0; i < 17; i++){   // row 1
-				let br = new brick((10 + i * 46) , 20, new Image(), 20, 40, false);
-				br.pic.src = "pics/OrangeBrick.png";
-			    bricksArray.push(br);
-				}
-			for (let i = 0; i < 17; i++){    //row 2
-				let br = new brick((10 + i * 46) , 50, new Image(), 20, 40, false);
-				br.pic.src = "pics/OrangeBrick.png";
-			    bricksArray.push(br);
-				}
-				
-			for (let i = 0; i < 17; i++){    //row 3
-				let br = new brick((10 + i * 46) , 80, new Image(), 20, 40, false);
-				br.pic.src = "pics/BlueBrick.png";
-			    bricksArray.push(br);
-				}
 
-			for (let i = 0; i < 17; i++){    //row 4
-				let br = new brick((10 + i * 46) , 110, new Image(), 20, 40, false);
+		function loadBricks() {
+			for (let i = 0; i < 17; i++) {   // row 1
+				let br = new brick((10 + i * 46), 20, new Image(), 20, 40, false);
+				br.pic.src = "pics/OrangeBrick.png";
+				bricksArray.push(br);
+			}
+			for (let i = 0; i < 17; i++) {    //row 2
+				let br = new brick((10 + i * 46), 50, new Image(), 20, 40, false);
+				br.pic.src = "pics/OrangeBrick.png";
+				bricksArray.push(br);
+			}
+
+			for (let i = 0; i < 17; i++) {    //row 3
+				let br = new brick((10 + i * 46), 80, new Image(), 20, 40, false);
 				br.pic.src = "pics/BlueBrick.png";
-			    bricksArray.push(br);
-				}
-			
+				bricksArray.push(br);
+			}
+
+			for (let i = 0; i < 17; i++) {    //row 4
+				let br = new brick((10 + i * 46), 110, new Image(), 20, 40, false);
+				br.pic.src = "pics/BlueBrick.png";
+				bricksArray.push(br);
+			}
+
 		}
-		
+
 		function playGame() {
-		   moveBall();
-		   checkBallHit();
-		   checkBrickHit();
-		   
-		   ctx.clearRect(0, 0, canvas.width, canvas.height);	
-	       ctx.drawImage(paddle.pic, paddle.xCord, paddle.yCord);
-		   ctx.drawImage(ball.pic, ball.xCord, ball.yCord);
-		   
-		   for (let i = 0; i < numOfBricks; i++){
-		     if (bricksArray[i].killed == false) {
-			   ctx.drawImage(bricksArray[i].pic, bricksArray[i].xCord, bricksArray[i].yCord);
-			 }
-		   }
-		   
-		   if ((bricksKilled != numOfBricks) & (ball.yCord < canvas.height)) // if not game over
-		      requestAnimationFrame(playGame);
-		}	
-		
+			moveBall();
+			checkBallHit();
+			checkBrickHit();
+
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.drawImage(paddle.pic, paddle.xCord, paddle.yCord);
+			ctx.drawImage(ball.pic, ball.xCord, ball.yCord);
+
+			for (let i = 0; i < numOfBricks; i++) {
+				if (bricksArray[i].killed == false) {
+					ctx.drawImage(bricksArray[i].pic, bricksArray[i].xCord, bricksArray[i].yCord);
+				}
+			}
+
+			if ((bricksKilled != numOfBricks) & (ball.yCord < canvas.height)) // if not game over
+				requestAnimationFrame(playGame);
+		}
+
 		function mouseMove(e) {    //gets the mouse movement
 			var xCord = e.clientX - canvas.offsetLeft;
-			paddle.xCord = xCord - paddle.width/2;
+			paddle.xCord = xCord - paddle.width / 2;
 		}
-		
-		function moveBall(){
-			 if (ball.moveRight == true)
+
+		function moveBall() {
+			if (ball.moveRight == true)
 				ball.xCord = ball.xCord + ball.xSpeed;
-			 else
-				 ball.xCord = ball.xCord - ball.xSpeed;
-			 
-			 if (ball.moveUp == true)
+			else
+				ball.xCord = ball.xCord - ball.xSpeed;
+
+			if (ball.moveUp == true)
 				ball.yCord = ball.yCord - ball.ySpeed;
-			 else
-				 ball.yCord = ball.yCord + ball.ySpeed;
+			else
+				ball.yCord = ball.yCord + ball.ySpeed;
 		}
-		
+
 		function checkBallHit() {
 			let loc = 0;
-			if ((ball.xCord + ball.size >= paddle.xCord) & (ball.xCord <= (paddle.xCord + paddle.width)) & (ball.yCord >= paddle.yCord - paddle.height) & (ball.yCord < (canvas.height - 15 - paddle.height)) & (ball.moveUp == false)){
-				 ball.moveUp = true; 
-			      
-			 	loc = (ball.xCord + ball.size/2) - paddle.xCord;
-				  
-				 if (loc < 5){
-				  ball.moveRight = false;
-				  ball.xSpeed = 8;
-				  ball.ySpeed = 7;
-				 }
-				 else if (loc < 15){
-				  ball.moveRight = false;
-				  ball.xSpeed = 7;
-				  ball.ySpeed = 8;
-				 }
-				else if (loc < 25){
-				  ball.moveRight = false;
-				  ball.xSpeed = 5;
-				  ball.ySpeed = 10;
-				 }
-				else if (loc < 35){
-				  ball.moveRight = false;
-				  ball.xSpeed = 2;
-				  ball.ySpeed = 13;
-				 }
-				else if (loc < 45){
-				 ball.moveRight = false;
-				  ball.xSpeed = 0;
-				  ball.ySpeed = 13;
-				 }
+			if ((ball.xCord + ball.size >= paddle.xCord) & (ball.xCord <= (paddle.xCord + paddle.width)) & (ball.yCord >= paddle.yCord - paddle.height) & (ball.yCord < (canvas.height - 15 - paddle.height)) & (ball.moveUp == false)) {
+				ball.moveUp = true;
 
-				 else if (loc < 55){
-				  ball.moveRight = true;
-				  ball.xSpeed = 2;
-				  ball.ySpeed = 13;
-				 }
-				 
-				 else if (loc < 65){
-				  ball.moveRight = true;
-				  ball.xSpeed = 5;
-				  ball.ySpeed = 10;
-				 }
-				 
-				 else if (loc < 75){
-				  ball.moveRight = true;
-				  ball.xSpeed = 7;
-				  ball.ySpeed = 8;
-				 }
-				 else{
-				  ball.moveRight = true;
-				  ball.xSpeed = 8;
-				  ball.ySpeed = 7;
-				 }
-				 
+				loc = (ball.xCord + ball.size / 2) - paddle.xCord;
 
-			
+				if (loc < 5) {
+					ball.moveRight = false;
+					ball.xSpeed = 8;
+					ball.ySpeed = 7;
+				}
+				else if (loc < 15) {
+					ball.moveRight = false;
+					ball.xSpeed = 7;
+					ball.ySpeed = 8;
+				}
+				else if (loc < 25) {
+					ball.moveRight = false;
+					ball.xSpeed = 5;
+					ball.ySpeed = 10;
+				}
+				else if (loc < 35) {
+					ball.moveRight = false;
+					ball.xSpeed = 2;
+					ball.ySpeed = 13;
+				}
+				else if (loc < 45) {
+					ball.moveRight = false;
+					ball.xSpeed = 0;
+					ball.ySpeed = 13;
+				}
+
+				else if (loc < 55) {
+					ball.moveRight = true;
+					ball.xSpeed = 2;
+					ball.ySpeed = 13;
+				}
+
+				else if (loc < 65) {
+					ball.moveRight = true;
+					ball.xSpeed = 5;
+					ball.ySpeed = 10;
+				}
+
+				else if (loc < 75) {
+					ball.moveRight = true;
+					ball.xSpeed = 7;
+					ball.ySpeed = 8;
+				}
+				else {
+					ball.moveRight = true;
+					ball.xSpeed = 8;
+					ball.ySpeed = 7;
+				}
+
+
+
 			}
-			
+
 			if (ball.yCord < 0)
 				ball.moveUp = false;
-			
+
 			if (ball.xCord + ball.size > canvas.width)
 				ball.moveRight = false;
-			
+
 			if (ball.xCord < 0)
 				ball.moveRight = true;
 		}
-		
-		function checkBrickHit(){
-		for(let i=0; i < numOfBricks; i++){
-			if ((ball.xCord + ball.size >= bricksArray[i].xCord) & (ball.xCord <= bricksArray[i].xCord + bricksArray[i].width) & (ball.yCord <= bricksArray[i].yCord + bricksArray[i].height) & (ball.yCord + ball.size >= bricksArray[i].yCord) & (bricksArray[i].killed == false)){
-				ball.moveUp = false; 
-				bricksArray[i].killed = true;
-				bricksKilled++;
+
+		function checkBrickHit() {
+			for (let i = 0; i < numOfBricks; i++) {
+				if ((ball.xCord + ball.size >= bricksArray[i].xCord) & (ball.xCord <= bricksArray[i].xCord + bricksArray[i].width) & (ball.yCord <= bricksArray[i].yCord + bricksArray[i].height) & (ball.yCord + ball.size >= bricksArray[i].yCord) & (bricksArray[i].killed == false)) {
+					ball.moveUp = false;
+					bricksArray[i].killed = true;
+					bricksKilled++;
+				}
+
 			}
 
-		}			
-			
-			
+
 		}
-		
-		  </script>
-	</body>
+
+	</script>
+</body>
+
 </html>
