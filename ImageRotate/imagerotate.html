@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--		
+		ITPRG 157
+		Lab # - X.Y
+		Description:
+			YOUR DETAILED DESCRIPTION OF WHAT THE PAGE/APPLICATION DOES
+		Created by: YOUR NAME HERE
+		Created on: DATE YOU FINISHED WORK
+-->
+<html lang ="en">
+	<head>
+        <meta charset="utf-8">
+		<meta name="author" content="YOUR NAME HERE">
+		<meta content="description" content="YOUR DESCRIPTION HERE">
+		<title>Image Rotate</title>
+		
+		<style>
+				img {
+				position:absolute;
+				top:30%;
+				left:30%;
+				display:block;
+				margin-left:auto;
+				margin-right:auto;
+				}
+		</style>
+		
+		
+	</head>
+	<body>
+		<img id="pic" src="lake.jpg"/>
+		
+		<script>
+		var x = 0;
+		const rotated = document.getElementById("pic");
+		
+		setInterval(rotatepic, 10);
+		
+		function rotatepic() {
+				rotated.style.transform = "rotate(" + x +"deg)";
+				x++;			
+		}
+		</script>
+		
+	</body>
+</html>

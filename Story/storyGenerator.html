@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Generator</title>
+    <script src="storyGenerator.js" defer></script>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .story {
+            color: blue;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        .missing {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Story Generator</h1>
+    <form id="storyForm">
+        <div class="input-container">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="input-container">
+            <label for="place">Place:</label>
+            <input type="text" id="place" name="place">
+        </div>
+        <div class="input-container">
+            <label for="object">Object:</label>
+            <input type="text" id="object" name="object">
+        </div>
+        <button type="button" onclick="generateStory()">Done</button>
+        <button type="button" onclick="resetFormAndStory()">Reset</button>
+    </form>
+    <div class="story" id="storyContainer">
+        <span class="placeholder">Name</span> was walking through the <span class="placeholder">Place</span> when they
+        found a mysterious <span class="placeholder">Object</span>.
+    </div>
+</body>
+
+</html>

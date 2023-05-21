@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--		
+		ITPRG 157
+		Lab # - X.Y
+		Description:
+			YOUR DETAILED DESCRIPTION OF WHAT THE PAGE/APPLICATION DOES
+		Created by: YOUR NAME HERE
+		Created on: DATE YOU FINISHED WORK
+-->
+<html lang ="en">
+	<head>
+        <meta charset="utf-8">
+		<meta name="author" content="YOUR NAME HERE">
+		<meta content="description" content="YOUR DESCRIPTION HERE">
+		<title>Simple Calculator</title>
+		<style>
+			div {
+				display:block;
+				margin-left:auto;
+				margin-right:auto;
+				width: 40%;
+			}
+			h1 {
+				color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+		<h1>Simple Calculator</h1>
+		Select an Operator:
+		<br>
+		<input type="radio" id="radioAdd" name ="operator" value="add" checked/>
+		<label for="radioAdd"> Add </label>
+		<input type="radio" id="radioSubtract" name ="operator" value="subtract"/>
+		<label for="radioSubtract"> Subtract </label>
+		<input type="radio" id="radioMultiply" name ="operator" value="multiply"/>
+		<label for="radioMultiply"> Multiply </label>
+		<input type="radio" id="radioDivide" name ="operator" value="divide"/>
+		<label for="radioDivide"> Divide </label>
+		<br><br><br>
+		<label for="textFirstNumber"> First Number </label>
+		<br>
+		<input type="text" id="textFirstNumber" value=""/>
+		<br><br>
+		<label for="textSecondNumber"> Second Number </label>
+		<br>
+		<input type="text" id="textSecondNumber" value=""/>
+		<br><br>
+		<p id="answer">Answer</p>
+		<br><br>
+		<button onclick="calculate()">Calculate</button>
+		</div>
+		
+		<script>
+		function calculate(){
+			var num1, num2, answer;
+			num1 = parseFloat(document.getElementById("textFirstNumber").value);
+			num2 = parseFloat(document.getElementById("textSecondNumber").value);
+			
+			if(document.getElementById("radioAdd").checked)
+				answer = num1 + num2;
+			else if(document.getElementById("radioSubtract").checked)
+				answer = num1 - num2;
+			else if(document.getElementById("radioMultiply").checked)
+				answer = num1 * num2;
+			else if(document.getElementById("radioDivide").checked)
+				answer = num1 / num2;
+			
+			document.getElementById("answer").innerHTML = answer;
+						
+		}
+		</script>
+	</body>
+</html>

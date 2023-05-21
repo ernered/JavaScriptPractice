@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roots Calculator</title>
+    <style>
+        input[type=number].invalid {
+            border: 2px solid red;
+        }
+    </style>
+    <script>
+        function validateInput(input) {
+            const value = parseInt(input.value);
+            if (isNaN(value) || value < -99 || value > 99) {
+                input.classList.add("invalid");
+            } else {
+                input.classList.remove("invalid");
+            }
+        }
+        function calculateRoots() {
+            const aInput = document.getElementById("a");
+            const bInput = document.getElementById("b");
+            const cInput = document.getElementById("c");
+
+            const a = parseInt(aInput.value);
+            const b = parseInt(bInput.value);
+            const c = parseInt(cInput.value);
+
+            if (isNaN(a) || a === 0 || isNaN(b) || isNaN(c) || a < -99 || a > 99 || b < -99 || b > 99 || c < -99 || c > 99) {
+                alert("Invalid input. Please enter integer values for a, b, and c, where a is nonzero and all values are between -99 and 99.");
+                validateInput(aInput);
+                validateInput(bInput);
+                validateInput(cInput);
+                return;
+            }
+
+            const discriminant = (b * b) - (4 * a * c);
+            let solutionMessage = "";
+
+            if (discriminant < 0) {
+                solutionMessage = "Error";
+            } else if (discriminant === 0) {
+                const singleRoot = -b / (2 * a);
+                solutionMessage = `Solution: x = ${singleRoot}`;
+            } else {
+                const root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                const root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                solutionMessage = `Solution: x = ${root1}, x = ${root2}`;
+            }
+
+            document.getElementById("solution").innerText = solutionMessage;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Roots Calculator</h1>
+    <form>
+        <label for="a">a:</label>
+        <input type="number" id="a" min="-99" max="99" step="1" oninput="validateInput(this);" required>
+        <br>
+        <label for="b">b:</label>
+        <input type="number" id="b" min="-99" max="99" step="1" oninput="validateInput(this);" required>
+        <br>
+        <label for="c">c:</label>
+        <input type="number" id="c" min="-99" max="99" step="1" oninput="validateInput(this);" required>
+        <br>
+        <button type="button" onclick="calculateRoots()">Calculate roots</button>
+    </form>
+    <p id="solution"></p>
+</body>
+
+</html>

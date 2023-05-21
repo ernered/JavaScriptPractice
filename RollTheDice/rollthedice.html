@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--		
+		ITPRG 157
+		Lab # - X.Y
+		Description:
+			YOUR DETAILED DESCRIPTION OF WHAT THE PAGE/APPLICATION DOES
+		Created by: YOUR NAME HERE
+		Created on: DATE YOU FINISHED WORK
+-->
+<html lang ="en">
+	<head>
+        <meta charset="utf-8">
+		<meta name="author" content="YOUR NAME HERE">
+		<meta content="description" content="YOUR DESCRIPTION HERE">
+		<title>Roll The Dice</title>
+		
+		<style>
+			h1 {
+				text-align: center;
+			}
+			
+			button{
+				display:block;
+				margin-left:auto;
+				margin-right:auto;
+			}
+			
+			canvas {
+				background-color:gold;
+				width:550px;
+				height:300px;
+				padding-left:0;
+				padding-right:0;
+				margin-left:auto;
+				margin-right:auto;
+				display:block;
+				border:2px solid black;
+		}
+		</style>
+		
+	</head>
+	<body>
+		<h1>Roll The Dice</h1>
+		<br>
+		<br>
+		<br>
+		<button onclick="rollTheDice()">Roll The Dice</button>
+		<br>
+		<br>
+		<br>
+		<canvas>
+		</canvas>
+		
+		<script>
+			var canvas = document.querySelector("canvas");
+			canvas.width = 550;
+			canvas.height = 300;
+			
+			var ctx = canvas.getContext("2d");
+			var dice = [];
+			let loc = "";
+			
+			for(let i=0; i<6; i++) {
+			dice[i] = new Image();
+			loc = "DiceImages/"+(i+1)+".jpg";
+			dice[i].src = loc;
+			}
+			
+			function rollTheDice() {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.drawImage(dice[Math.floor(Math.random() * 6)], 50, 50);
+				ctx.drawImage(dice[Math.floor(Math.random() * 6)], 300, 50);
+			}	
+			
+		</script>
+	
+	</body>
+</html>

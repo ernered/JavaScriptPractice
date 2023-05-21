@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--		
+		ITPRG 157
+		Lab # - X.Y
+		Description:
+			YOUR DETAILED DESCRIPTION OF WHAT THE PAGE/APPLICATION DOES
+		Created by: YOUR NAME HERE
+		Created on: DATE YOU FINISHED WORK
+-->
+<html lang ="en">
+	<head>
+        <meta charset="utf-8">
+		<meta name="author" content="YOUR NAME HERE">
+		<meta content="description" content="YOUR DESCRIPTION HERE">
+		<title>Weather Parallel Arrays Example</title>
+	</head>
+	<body>
+		<script>
+				var day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+				var high = [75, 85, 83, 63, 65, 74, 84];
+				var low = [56, 67, 68, 51, 49, 57, 66];
+				var condition = ["Sunny", "Sunny", "Sunny", "Rain", "Rain", "Cloudy", "Sunny"];
+				document.write("<table>");
+				document.write("<tr>");
+				document.write("<th>" + "Day" + "</th>");
+				document.write("<th>" + "High" + "</th>");
+				document.write("<th>" + "Low" + "</th>");
+				document.write("<th>" + "Condition" + "</th>");
+				document.write("</tr>");
+				
+				for(let i=0; i<day.length; i++){
+				document.write("<tr>");
+				document.write("<td>" + day[i] + "</td>");
+				document.write("<td>" + high[i] + "</td>");
+				document.write("<td>" + low[i] + "</td>");
+				document.write("<td>" + condition[i] + "</td>");
+				document.write("</tr>");
+				}
+				
+				document.write("</table>");
+		</script>
+	</body>
+</html>

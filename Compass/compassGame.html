@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Compass Game</title>
+    <style>
+        table {
+            margin: 20px auto;
+            display: table;
+        }
+
+        tr {
+            display: table-row;
+        }
+
+        td {
+            display: table-cell;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        input[type=text] {
+            width: 20px;
+            text-align: center;
+            max-length: 1;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .rotate {
+            transform: rotate(-45deg);
+        }
+
+        button {
+            font-style: italic;
+        }
+
+        .warning {
+            display: none;
+        }
+
+        noscript .warning {
+            display: block;
+            color: red;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td><span id="direction1">E</span></td>
+            <td><button class="rotate" onclick="swapDirections(1,2)">&#x2194;</button></td>
+            <td><input type="text" id="input1"></td>
+        </tr>
+        <tr>
+            <td><button class="rotate" onclick="swapDirections(2,1)">&#x2194;</button></td>
+            <td><span id="direction2">S</span></td>
+            <td><input type="text" id="input2"></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="input3"></td>
+            <td><button class="rotate" onclick="swapDirections(3,4)">&#x2194;</button></td>
+            <td><span id="direction3">N</span></td>
+        </tr>
+        <tr>
+            <td><button class="rotate" onclick="swapDirections(4,3)">&#x2194;</button></td>
+            <td><input type="text" id="input4"></td>
+            <td><span id="direction4">W</span></td>
+        </tr>
+    </table>
+    <div style="text-align: center;">
+        <button onclick="restartGame()">Restart</button>
+        <button onclick="updateDirections()" disabled>Update</button>
+    </div>
+    <noscript>
+        <p class="warning">Please enable JavaScript to play the game.</p>
+    </noscript>
+    <script>
+        let directions = ['E', 'S', 'N', 'W'];
+        let inputs = document.querySelectorAll('input[type=text]');
+        let updateButton = document.querySelector('button:last-of-type');
+
+        function shuffleDirections() {
+            for (let i = directions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [directions[i], directions[j]] = [directions[j], directions[i]];
+            }
+        }
+
+        function displayDirections() {
+            for (let i = 0; i < 4; i++) {
+                document.getElementById('direction' + (i + 1)).textContent = directions[i];
+                inputs[i].value = '';
+            }
+            updateButton.disabled = true;
+            inputs[0].focus
+        }
+
+        function restartGame() {
+            shuffleDirections();
+            displayDirections();
+            for (let i = 0; i < 4; i++) {
+                inputs[i].disabled = false;
+            }
+            updateButton.disabled = false;
+        }
+
+        function updateDirections() {
+            for (let i = 0; i < 4; i++) {
+                directions[i] = inputs[i].value.toUpperCase();
+                document.getElementById('direction' + (i + 1)).textContent = directions[i];
+                inputs[i].disabled = true;
+            }
+            updateButton.disabled = true;
+        }
+
+        function swapDirections(i, j) {
+            [directions[i - 1], directions[j - 1]] = [directions[j - 1], directions[i - 1]];
+            displayDirections();
+        }
+
+    </script>
+</body>
+
+</html>

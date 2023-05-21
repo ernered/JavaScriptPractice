@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Rowing Federation</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .bg-image {
+            background-image: url('https://images.pexels.com/photos/1426718/pexels-photo-1426718.jpeg');
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            font-size: 48px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        p {
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        audio,
+        iframe {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-image"></div>
+    <div class="content">
+        <h1>World Rowing Federation</h1>
+        <p>When rowing, listening to good music like Creed can be beneficial:</p>
+        <audio controls>
+            <source src="02 - Ode.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <p>Here is another good song:</p>
+
+        <audio controls>
+            <source src="03 - My Own Prison.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/kUTzDAu0O48" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+
+
+    </div>
+</body>
+
+</html>

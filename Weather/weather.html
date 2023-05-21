@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Weather</title>
+    <style>
+        .float-left {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .flex-item {
+            background-color: #f1f1f1;
+            border: 1px solid black;
+            padding: 20px;
+            width: calc(33% - 20px);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .flex-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>World Weather</h1>
+    <h3>United States | Canada | Mexico</h3>
+    <img src="storm.jpg" alt="Storm Image" style="width: 20%;" class="float-left">
+    <div class="flex-container">
+        <div class="flex-item">United States</div>
+        <div class="flex-item"><a
+                href="https://weather.com/weather/tenday/l/Chicago+IL?canonicalCityId=51327091448a763db3e0093b240009381d87952467e6c2ba8bad55f1328ec986">Chicago</a>
+        </div>
+        <div class="flex-item"><a
+                href="https://weather.com/weather/tenday/l/54f9d8baac32496f6b5497b4bf7a277c3e2e6cc5625de69680e6169e7e38e9a8">San
+                Francisco</a></div>
+        <div class="flex-item">Canada</div>
+        <div class="flex-item"><a
+                href="https://weather.com/weather/tenday/l/6a10d0d57e3e9680a8a996ae7423770e094e819984a48b58528d1b52e701c5ee">Ottawa</a>
+        </div>
+        <div class="flex-item"><a
+                href="https://weather.com/weather/tenday/l/f3141f2af3dc5f81e5c642149e17e8be0ed3c19d1c3beb6610ae426ac36419ee">Calgary</a>
+        </div>
+        <div class="flex-item">Mexico</div>
+        <div class="flex-item"><a
+                href="https://weather.com/weather/tenday/l/277950cdbe74f8b3c7b936cf41864258c03998c6fe7a434bdc42e4fc2b880ff2">Tijuana</a>
+        </div>
+        <div class="flex-item"><a
+                href="https://weather.com/weather/tenday/l/4eb24ec6a392affc2f8ced897a96cdd6a11f0dd61a7ad16dcd62785a997c2248">Guadalajara</a>
+        </div>
+    </div>
+</body>
+
+</html>
